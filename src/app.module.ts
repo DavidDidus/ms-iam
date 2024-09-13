@@ -10,7 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGO_URI || 'mongodb://mongo:27017/nest' || 'mongodb://mongo:27017'),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     CompanyModule,
     AreaModule, 
     UserModule, 
