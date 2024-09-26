@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { MachineModule } from './machine/machine.module';
 import { UserMachineModule } from './user-machine/user-machine.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { MongooseModule } from '@nestjs/mongoose';
     AreaModule, 
     UserModule, 
     MachineModule, 
-    UserMachineModule],
+    UserMachineModule,
+    AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
