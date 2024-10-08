@@ -4,7 +4,8 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './jwt.strategy';
-import { UserModule } from '../user/user.module'; // Importar el módulo de usuarios
+import { UserModule } from '../user/user.module';
+import { HttpModule } from '@nestjs/axios';  // Importa el HttpModule
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { UserModule } from '../user/user.module'; // Importar el módulo de usua
       secret: process.env.JWT_SECRET || 'defaultSecret',
       signOptions: { expiresIn: '15m' },
     }),
-    UserModule, // Añadir aquí
+    UserModule,
+    HttpModule,  // Asegúrate de que el HttpModule esté aquí para habilitar HttpService
   ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
