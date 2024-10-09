@@ -14,7 +14,7 @@ export class AuthController {
   async checkToken(@Headers('authorization') authorization: string) {
     // Asegúrate de que el token esté en el formato "Bearer <token>"
     const token = authorization?.split(' ')[1]; // Extrae el token desde el header
-
+    
     if (!token) {
       throw new UnauthorizedException('Token no proporcionado');
     }
@@ -23,7 +23,12 @@ export class AuthController {
   }
 
   @Post('refresh-token')
-  async refreshToken(@Body('refreshToken') refreshToken: string) {
-    return this.authService.refreshToken(refreshToken);
+  async refreshToken(@Headers('authorization') refreshToken: string) {
+    const token = refreshToken?.split(' ')[1]; // Extrae el token desde el header
+    if (!refreshToken) {
+      throw new UnauthorizedException('Token de refresco no proporcionado');
+    }
+    
+    return this.authService.refreshToken(token);
   }
 }
