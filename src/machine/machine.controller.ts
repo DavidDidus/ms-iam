@@ -7,9 +7,8 @@ export class MachineController {
 
     @Post()
     create(@Body() createMachineDto: any) {
-        return this.machineService.create(createMachineDto);
+    return this.machineService.create(createMachineDto);
     }
-
     @Get()
     findAll() {
         return this.machineService.findAll();

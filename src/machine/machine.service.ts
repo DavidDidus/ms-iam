@@ -8,9 +8,21 @@ export class MachineService {
     constructor(@InjectModel(Machine.name) private machineModel: Model<Machine>) {}
 
     async create(createMachineDto: any): Promise<Machine> {
-        const createrMachine = new this.machineModel(createMachineDto);
-        return createrMachine.save();
-    }
+        const { name, description } = createMachineDto;
+      
+        // Validar el formato de la patente (ejemplo: formato chileno)
+        const isValidPatent = /^[A-Z]{2,3}-\d{2,3}$/.test(name); // Ejemplo: XX-123 o XXX-123
+        if (!isValidPatent) {
+          throw new Error('El formato de la patente no es válido. Ejemplo válido: XX-123.');
+        }
+      
+        if (!description || description.trim() === '') {
+          throw new Error('La descripción del vehículo no puede estar vacía.');
+        }
+      
+        const newMachine = new this.machineModel(createMachineDto);
+        return newMachine.save();
+      }
 
     async findAll(): Promise<Machine[]> {
         return this.machineModel.find().exec();

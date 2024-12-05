@@ -30,4 +30,23 @@ export class UserMachineController {
         return this.userMachineService.remove(id);
     }
 
+    @Post(':userId/:machineId')
+    async createRelationship(
+    @Param('userId') userId: string,
+    @Param('machineId') machineId: string,
+    ) {
+    return this.userMachineService.createRelationship(userId, machineId);
+    }
+
+    @Get('user/:userId')
+    async getMachinesByUser(@Param('userId') userId: string) {
+    return this.userMachineService.getMachinesByUser(userId);
+    }
+
+    @Get('machine/:machineId')
+    async getUsersByMachine(@Param('machineId') machineId: string) {
+    return this.userMachineService.getUsersByMachine(machineId);
+    }
+
+
 }
